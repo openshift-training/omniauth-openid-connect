@@ -580,7 +580,7 @@ module OmniAuth
           raise OmniAuth::OpenIDConnect::MissingIdTokenError.new("Missing 'access_token' or 'id_token' param")
         end
 
-        verify_id_token!(params['id_token'])     TODO TODO TODO
+        verify_id_token!(params['id_token'])
                   
         user_data = decode_id_token(params['id_token']).raw_attributes
         env['omniauth.auth'] = AuthHash.new(
