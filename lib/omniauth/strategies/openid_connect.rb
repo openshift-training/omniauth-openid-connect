@@ -478,13 +478,13 @@ module OmniAuth
 
         # 鍵を選ぶ。"{ヘッダ部}.{ペイロード部}.{シグネチャ部}" と、ピリオドで
         # 区切られている。ヘッダ部にアルゴリズムが書かれている.
-        header = (JSON::JWS.decode_compact_serialized actoken.id_token, :skip_verification).header
+        header = (JSON::JWS.decode_compact_serialized @access_token.id_token, :skip_verification).header
         #header = ::JWT.decoded_segments(actoken.id_token, false)[0]
         key = key_or_secret header
 
         # このなかで署名の検証も行う. => JSON::JWS::VerificationFailed
         id_token = ::OpenIDConnect::ResponseObject::IdToken.decode(
-                       actoken.id_token, key)
+                       @access_token.id_token, key)
         verify_id_token!(id_token)
 
         @access_token
